@@ -56,9 +56,40 @@ function onReady() {
 //      if hp will hit 0, the fungus is dead. We have to give it the 'dead' class
 
 function makeAttack(event, attackName){
-    console.log("Making an attack");
-    // Find the attack in the attacks array
+    console.log("Using", attackName);
+    // Find the object with the attack name
+    let attack = attacks.find(attack => attack.name === attackName);
+    // Get the apCost and the hpDamage for the attack
+    let apCost = attack.apCost;
+    let hpDamage = attack.hpDamage;
+    console.log("AP", apCost);
+    console.log("HP", hpDamage);
+    
+    // Subtract the damage from the fungus HP. Fungus HP below zero becomes zero
+    if(fungusHP - hpDamage < 0){
+        fungusHP = 0;
+    } else {
+        fungusHP -= hpDamage;
+    }
+    
+    // Check what AP is then adjust it. If character AP is going to fall below zero, set it to zero.
+    if(characterAP - apCost < 0){
+        characterAP = 0;
+    } else {
+        characterAP -= apCost;
+    }
 
+    console.log("Character AP:", characterAP);
+    console.log("Fungus HP:", fungusHP);
+
+    // Render the changes in the DOM
+    let apText = document.getElementsByClassName('ap-text');
+    //let apMeter = document.getElementsByClassName('ap-meter');
+    let hpText = document.getElementsByClassName('hp-text')
+    
+    
 }
+
+
 
 onReady()
