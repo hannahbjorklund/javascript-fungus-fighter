@@ -82,6 +82,17 @@ function makeAttack(event, attackName){
     console.log("Character AP:", characterAP);
     console.log("Fungus HP:", fungusHP);
 
+    render();
+}
+
+function regen(){
+    if(fungusHP < 50 && fungusHP > 0){
+        fungusHP++;
+    }
+    render();
+}
+
+function render(){
     // Render the changes to AP in the DOM
     let apMeter = document.getElementById('ap-meter');
     let apText = document.getElementById('ap-text');
@@ -94,8 +105,18 @@ function makeAttack(event, attackName){
     hpMeter.value = fungusHP;
     hpText.innerHTML = `${fungusHP} HP`;
 
+    // Render changes to win state
+    if(fungusHP == 0){
+        console.log("Fungi died");
+        document.getElementById('freaky-fungus').classList.add('freaky-fungus.dead');
+    } else if(characterAP == 0){
+        console.log("You lost to fungus");
+        document.getElementById('freaky-fungus').classList.add('freaky-fungus.jump');
+        // Disable buttons
+        document.getElementsByName(button).setAttribute('disabled');
+    }
 }
 
-
-
 onReady()
+setInterval(regen, 1000);
+
