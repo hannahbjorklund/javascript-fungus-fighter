@@ -82,12 +82,18 @@ function makeAttack(event, attackName){
     console.log("Character AP:", characterAP);
     console.log("Fungus HP:", fungusHP);
 
-    // Render the changes in the DOM
-    let apText = document.getElementsByClassName('ap-text');
-    //let apMeter = document.getElementsByClassName('ap-meter');
-    let hpText = document.getElementsByClassName('hp-text')
-    
-    
+    // Render the changes to AP in the DOM
+    let apMeter = document.getElementById('ap-meter');
+    let apText = document.getElementById('ap-text');
+    apMeter.value = characterAP;    
+    apText.innerHTML = `${characterAP} AP`;
+
+    // Render changes to HP
+    let hpMeter = document.getElementById('hp-meter');
+    let hpText = document.getElementById('hp-text');
+    hpMeter.value = fungusHP;
+    hpText.innerHTML = `${fungusHP} HP`;
+
 }
 
 
